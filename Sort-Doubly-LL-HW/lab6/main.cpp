@@ -1,61 +1,62 @@
-#include "binarySearchTree.h"
-#include "ArgumentManager.h"
-#include <algorithm>
+	#include "binarySearchTree.h"
+	#include "ArgumentManager.h"
+	#include <algorithm>
 
-int main(int argc, char* argv[])
-{
-	ArgumentManager am(argc, argv);
-	//ifstream input(am.get("input"));
-	//ofstream output(am.get("output"));
-
-	ifstream input("input2.txt");
-	ofstream output("ans.txt");
-
-	BST tree;
-
-	string command;
-	string nums;
-	int val;
-	
-	while (getline(input, command))
+	int main(int argc, char* argv[])
 	{
-		command.erase(remove(command.begin(), command.end(), '\n'), command.end());
-		command.erase(remove(command.begin(), command.end(), '\r'), command.end());
+		ArgumentManager am(argc, argv);
+		//ifstream input(am.get("input"));
+		//ofstream output(am.get("output"));
 
-		if (command == "Insert")
+		ifstream input("input3.txt");
+		ofstream output("ans.txt");
+
+		BST tree;
+
+		string command;
+		string nums;
+		int val;
+	
+		while (getline(input, command))
 		{
-			cout << "Inputting numbers: ";
-			getline(input, nums);
-			istringstream inSS(nums);
-			while (inSS >> nums)
+			command.erase(remove(command.begin(), command.end(), '\n'), command.end());
+			command.erase(remove(command.begin(), command.end(), '\r'), command.end());
+
+			if (command == "Insert")
 			{
-				val = stoi(nums);
-				tree.insert(val);
-				cout << val << " ";
+				cout << "Inputting numbers: ";
+				getline(input, nums);
+				istringstream inSS(nums);
+				while (inSS >> nums)
+				{
+					val = stoi(nums);
+					tree.insert(val);
+					cout << val << " ";
+				}
+				cout << endl;
 			}
-			cout << endl;
-		}
-		else if (command == "Remove")
-		{
-			cout << "Removing number/s: ";
-			getline(input, nums);
-			istringstream inSS(nums);
-			while (inSS >> nums)
+			else if (command == "Remove")
 			{
-				val = stoi(nums);
-				cout << val << " " << endl;
-				tree.remove(val);
+				cout << "Removing number/s: ";
+				getline(input, nums);
+				istringstream inSS(nums);
+				while (inSS >> nums)
+				{
+					val = stoi(nums);
+					cout << val << " " << endl;
+					tree.remove(val);
+				}
+			}
+			else if (command == "Traverse")
+			{
+				cout << "Checking traversal." << endl;
+				getline(input, nums);
+				cout << nums << endl;
+				tree.checkOrder(nums, output);
 			}
 		}
-		else if (command == "Traverse")
-		{
-			cout << "Checking traversal." << endl;
-			getline(input, nums);
-			tree.checkOrder(nums, output);
-		}
+
+		// test output
+
+		return 0;
 	}
-
-	// test output
-
-	return 0;
-}
