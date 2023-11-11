@@ -1,3 +1,11 @@
+#pragma once
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <sstream>
+
+using namespace std;
 
 struct node
 {
@@ -10,11 +18,13 @@ class BST
 {
 private:
 	node* root;
+	int size;
 
 public:
 	BST()
 	{
 		root = nullptr;
+		size = 0;
 	}
 	node* getRoot()
 	{
@@ -25,8 +35,8 @@ public:
 	node* minValueNode(node* r);
 	void remove(int val);
 	node* remover(node* r, int val);
-	bool checkOrder(string nums, ofstream& output);
-	void inOrder(node* r);
-	void preOrder(node* r);
-	void postOrder(node* r);
+	void checkOrder(string nums, ofstream& output);
+	bool inOrder(node* r, int arr[], int& i);
+	bool preOrder(node* r, int arr[], int& i);
+	bool postOrder(node* r, int arr[], int& i);
 };
